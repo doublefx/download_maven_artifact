@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  connection: local
+  remote_user: root
+
+  tasks:
+  - name: Creates artifactory data directory
+    file: path=/root/artifactory state=directory recurse=yes
+
+  - name: extract artifactory data
+    unarchive:
+      src: "{{ playbook_dir  }}/artifactoryData.tar.gz"
+      dest: /root/artifactory/
+
+  - name: run artifactory
+    docker_container:
+      name: artifactory
+      image: docker.bintray.io/jfrog/artifactory-oss:latest
+      state: started
+      pull: true
+      privileged: true
+      volumes:
+        - "/root/artifactory:/var/opt/jfrog/artifactory"
+      keep_volumes: true
+      ports:
+        - "127.0.0.1:8081:8081"

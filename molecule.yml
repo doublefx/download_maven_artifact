@@ -1,0 +1,32 @@
+---
+# Using Molecule (https://github.com/metacloud/molecule) to test this role on ubuntu-16.10 and CentOs/7 at the time of the tests.
+# Feel free to update or extend this role / tests via pull requests.
+dependency:
+  name: galaxy
+
+ansible:
+  playbook: ./tests/playbook.yml
+  # verbose: True
+
+driver:
+  name: docker
+
+docker:
+  containers:
+
+    - name: ubuntu
+      image: ubuntu
+      image_version: latest
+      links: {artifactory}
+      ansible_groups:
+        - debian
+
+    - name: centos7
+      image: centos
+      image_version: latest
+      links: {artifactory}
+      ansible_groups:
+        - redhat
+
+verifier:
+  name: testinfra
