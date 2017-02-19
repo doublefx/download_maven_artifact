@@ -24,6 +24,6 @@ molecule ${MOCLECULE_OPTION} test --destroy never
 if (( ${DESTROY} )) ; then
     molecule destroy
     docker stop artifactory > null
-    rm -rf /root/artifactory > null
+    sudo rm -rf /root/artifactory > null
     echo 'removed container artifactory.'
 fi
