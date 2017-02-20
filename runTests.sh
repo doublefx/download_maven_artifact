@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -e
+
 USAGE="Usage: `basename $0` options -d to debug, -k to keep the docker containers at the end of the tests.";
 ANSIBLE_OPTION=""
 MOCLECULE_OPTION=""
