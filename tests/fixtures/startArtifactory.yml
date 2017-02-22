@@ -9,7 +9,7 @@
 
   - name: extract artifactory data
     unarchive:
-      src: "{{ playbook_dir  }}/artifactoryData.tar.gz"
+      src: "{{ playbook_dir }}/artifactoryData.tar.gz"
       dest: /root/artifactory/
 
   - name: run artifactory

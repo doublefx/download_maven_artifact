@@ -24,8 +24,5 @@ ansible-playbook tests/fixtures/startArtifactory.yml ${ANSIBLE_OPTION}
 molecule ${MOCLECULE_OPTION} test --destroy never
 
 if (( ${DESTROY} )) ; then
-    molecule destroy
-    docker stop artifactory > null
-    sudo rm -rf /root/artifactory > null
-    echo 'removed container artifactory.'
+    . ./stopTests.sh
 fi
