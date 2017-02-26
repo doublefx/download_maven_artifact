@@ -20,7 +20,6 @@
       image: docker.bintray.io/jfrog/artifactory-oss:latest
       state: started
       pull: true
-      privileged: true
       volumes:
         - "/root/artifactory:/var/opt/jfrog/artifactory"
       keep_volumes: true
