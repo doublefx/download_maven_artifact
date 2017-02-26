@@ -1,6 +1,6 @@
 ---
 
-# Causes an error if we try which something that doesn't exist so use this
+# Causes an error if we try with something that doesn't exist so use this
 # as a workaround.
 - name: Check to see if pip is already installed.
   command: "{{ pip }} --version"
@@ -23,7 +23,7 @@
   when: pip_is_installed.rc != 0
 
 # $ pip --version
-# pip 1.5.2 from /usr/local/lib/python2.7/dist-packages (python 2.7)
+# pip 9.0.1 from /usr/local/lib/python2.7/dist-packages (python 2.7)
 - name: Check to see if pip is installed at the correct version.
   shell: "{{ pip }} --version | awk '{print $2}'"
   register: pip_installed_version
@@ -48,5 +48,6 @@
     name: "{{ item }}"
     state: present
   with_items:
+    - pydevd
     - lxml
     - requests

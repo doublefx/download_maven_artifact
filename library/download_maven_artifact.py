@@ -151,6 +151,12 @@ from ansible.module_utils.basic import *
 from ansible.module_utils.urls import *
 from lxml import etree
 
+'''
+import pydevd
+pydevd.settrace('192.168.99.1', port=51234,
+                stdoutToServer=True, stderrToServer=True)
+                '''
+
 try:
     from urllib.parse import urlparse
 except ImportError:
@@ -400,8 +406,6 @@ def main():
     version = module.params["version"]
     classifier = module.params["classifier"]
     extension = module.params["extension"]
-    repository_username = module.params["username"]
-    repository_password = module.params["password"]
     state = module.params["state"]
     dest = module.params["dest"]
 

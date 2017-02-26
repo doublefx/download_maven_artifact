@@ -2,4 +2,4 @@
 molecule destroy
 docker stop artifactory > null
 sudo rm -rf /root/artifactory > null
-echo removed container artifactory.
+echo Removed container artifactory.

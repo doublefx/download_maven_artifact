@@ -1,12 +1,14 @@
 ---
 - hosts: debian, redhat
   remote_user: root
+  any_errors_fatal: yes
+  gather_facts: no
 
   roles:
     - download_maven_artifact
 
   tasks:
-    - name: Download an artifact from a private repository requiring authentication
+    - name: "Download an artifact from a private repository requiring authentication"
       download_maven_artifact:
         username: fred
         password: password
@@ -15,15 +17,15 @@
         group_id: gamesys.community.fred.thomas
         artifact_id: flexbuild
         extension: swf
-        # version: 6.67.2-SNAPSHOT
+        version: "{{ version | default('latest') }}"
         dest: ./flexbuild.swf
 
-    - name: get a reference to the downloaded artifact
+    - name: "get a reference to the downloaded artifact"
       stat:
         path: ./flexbuild.swf
       register: artifact
 
-    - name: fails if artifact not present
+    - name: "fails if artifact not present"
       fail:
         msg: "Whoops! Something's broken, flexbuild.swf is not here"
       when: artifact.stat.exists==false

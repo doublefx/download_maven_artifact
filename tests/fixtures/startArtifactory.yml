@@ -2,9 +2,11 @@
 - hosts: localhost
   connection: local
   become: true
+  any_errors_fatal: yes
+  gather_facts: no
 
   tasks:
-  - name: Creates artifactory data directory
+  - name: "creates Artifactory data directory"
     file: path=/root/artifactory state=directory recurse=yes
 
   - name: extract artifactory data
@@ -12,7 +14,7 @@
       src: "{{ playbook_dir }}/artifactoryData.tar.gz"
       dest: /root/artifactory/
 
-  - name: run artifactory
+  - name: "starts Artifactory"
     docker_container:
       name: artifactory
       image: docker.bintray.io/jfrog/artifactory-oss:latest
@@ -24,3 +26,12 @@
       keep_volumes: true
       ports:
         - "127.0.0.1:8081:8081"
+
+  - name: "waits until Artifactory is up and running"
+    uri:
+     url: "http://127.0.0.1:8081/artifactory/webapp/"
+     status_code: 200
+    register: artifactory
+    until: artifactory.status == 200
+    retries: 60
+    delay: 5

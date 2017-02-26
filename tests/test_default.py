@@ -1,10 +1,10 @@
 import testinfra.utils.ansible_runner
 
-"""
+'''
 import pydevd
 pydevd.settrace('192.168.99.1', port=51234,
                 stdoutToServer=True, stderrToServer=True)
-"""
+'''
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     '.molecule/ansible_inventory').get_hosts('all')
