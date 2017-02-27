@@ -9,7 +9,7 @@
   - name: "creates Artifactory data directory"
     file: path=/root/artifactory state=directory recurse=yes
 
-  - name: extract artifactory data
+  - name: "extract artifactory data"
     unarchive:
       src: "{{ playbook_dir }}/artifactoryData.tar.gz"
       dest: /root/artifactory/
