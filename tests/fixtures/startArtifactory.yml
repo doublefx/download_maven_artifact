@@ -24,7 +24,7 @@
         - "/root/artifactory:/var/opt/jfrog/artifactory"
       keep_volumes: true
       ports:
-        - "127.0.0.1:8081:8081"
+        - "8081:8081"
 
   - name: "waits until Artifactory is up and running"
     uri:
